@@ -1,0 +1,204 @@
+import org.junit.runner.*;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
+
+class Main {
+    public static void main(String[] args) {
+
+        // Create example array
+        int[][] array = new int[][] { { 1, 8, 3 }, { -7, 5, 2 }, { 4, 0, 2 } };
+
+        // Print max and min
+        System.out.println("Array max = " + array2DMax(array));
+        System.out.println("Array min = " + array2DMin(array));
+
+        // Print row 0 sum and column 2 sum from arr2d.
+        System.out.println("\nRow 0 sum = " + rowSum(array, 0));
+        System.out.println("Col 2 sum = " + colSum(array, 2));
+
+        // Get all row sums and all col sums and print
+        int[] rowsum = allRowSums(array);
+        int[] colsum = allColSums(array);
+
+        System.out.print("\nAll rows sums = [");
+        for (int i = 0; i < rowsum.length; i++)
+            System.out.print(rowsum[i] + " ");
+        System.out.print("]\n");
+
+        System.out.print("All cols sums = [");
+        for (int i = 0; i < colsum.length; i++)
+            System.out.print(colsum[i] + " ");
+        System.out.print("]\n");
+
+        // Test row magic and col magic arrays
+        int[][] rowmagic = new int[][] { { 1, 2, 3 }, { -1, 5, 2 }, { 4, 0, 2 } };
+        int[][] colmagic = new int[][] { { 1, -1, 4, 10 }, { 3, 5, 0, -6 } };
+
+        System.out.println("\nCheck row magic array");
+        System.out.println("Row magic = " + isRowMagic(rowmagic));
+        System.out.println("Col magic = " + isColMagic(rowmagic));
+
+        System.out.println("\nCheck col magic array");
+        System.out.println("Row magic = " + isRowMagic(colmagic));
+        System.out.println("Col magic = " + isColMagic(colmagic));
+
+        // Test row even sum increasing and col odd sum decreasing arrays
+        int[][] arrayIncDec = new int[][] { { 1, -2, 3 }, { 7, 5, 2 }, { 4, 0, 2 } };
+        System.out.println("\nCheck row even sum increasing array");
+        System.out.println("array = " + isRowEvenInc(arrayIncDec));
+
+        System.out.println("\nCheck col odd sum decreasing array");
+        System.out.println("array = " + isColOddDec(arrayIncDec));
+    }
+
+    public static int array2DMax(int[][] a) {
+        int maxValue = a[0][0];
+        for (int r = 0; r < a.length; r++) {
+            for (int c = 0; c < a[r].length; c++) {
+                if (a[r][c] > maxValue) {
+                    maxValue = a[r][c];
+                }
+            }
+        }
+        return maxValue;
+    }
+
+    public static int array2DMin(int[][] a) {
+        int minValue = a[0][0];
+        for (int r = 0; r < a.length; r++) {
+            for (int c = 0; c < a[r].length; c++) {
+                if (a[r][c] < minValue) {
+                    minValue = a[r][c];
+                }
+            }
+        }
+        return minValue;
+    }
+
+    public static int rowSum(int[][] a, int x) {
+        int sumRow = 0;
+        for (int r = 0; r < a[x].length; r++) {
+            sumRow += a[x][r];
+        }
+        return sumRow; // return your own value here
+    }
+
+    public static int colSum(int[][] a, int x) {
+        int columnsum = 0;
+        for (int c = 0; c < a.length; c++) {
+            columnsum += a[c][x];
+        }
+        return columnsum;
+    }
+
+    public static int[] allRowSums(int[][] a) {
+        int[] SumOfRows = new int[a.length];
+        int total = 0;
+
+        for (int r = 0; r < a.length; r++) {
+            for (int c = 0; c < a[0].length; c++) {
+                total = total + a[r][c];
+            }
+            SumOfRows[r] = total;
+            total = 0;
+
+        }
+        return SumOfRows;
+    }
+
+    public static int[] allColSums(int[][] a) {
+        int[] value = new int[a[0].length];
+        int total = 0;
+        for (int c = 0; c < a[0].length; c++) {
+            total = 0;
+            for (int r = 0; r < a.length; r++) {
+                total = total + a[r][c];
+            }
+            value[c] = total;
+        }
+        return value;
+    }
+
+    public static boolean isRowMagic(int[][] a) {
+        int value[] = allRowSums(a);
+
+        return isitMagic(value);
+    }
+
+    public static boolean isColMagic(int[][] a) {
+        int value[] = allColSums(a);
+
+        return isitMagic(value);
+    }
+
+    public static boolean isRowEvenInc(int[][] a) {
+        int[] value = new int[a.length];
+        int total = 0;
+
+        for (int r = 0; r < a.length; r++) {
+            for (int c = 0; c < a[0].length; c++) {
+                if (isitEven(a[r][c])) {
+                    total = total + a[r][c];
+                }
+            }
+            value[r] = total;
+            total = 0;
+        }
+        for (int i = 0; i < value.length - 1; i++) {
+            if (value[i] >= value[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isColOddDec(int[][] a) {
+        int[] value = new int[a[0].length];
+        int total = 0;
+
+        for (int c = 0; c < a[0].length; c++) {
+            total = 0;
+            for (int r = 0; r < a.length; r++) {
+                if (isitodd(a[r][c])) {
+                    total = total + a[r][c];
+                }
+            }
+            value[c] = total;
+        }
+        for (int i = 0; i < value.length - 1; i++) {
+            if (value[i] <= value[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Helper methods - you can include your own helper methods here
+    // Checks if something is odd
+    public static boolean isitodd(int a) {
+        if (a % 2 != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Checks if something is even
+    public static boolean isitEven(int a) {
+        if (a % 2 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // Checks if something is "Magic"
+    public static boolean isitMagic(int[] a) {
+        for (int i = 0; i < a.length - 1; i++) {
+            if (a[i] != a[i + 1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
