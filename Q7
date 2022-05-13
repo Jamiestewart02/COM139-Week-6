@@ -1,0 +1,50 @@
+class Main {
+  public static void main(String[] args) {
+    System.out.println("Create your array");
+    int size = Console.getInt("How many numbers");
+    int [] numbers = new int[size];
+    int counter = 1;
+    for(int i = 0; i < size; i++){
+      numbers[i] = Console.getInt("Enter number " + counter);
+      System.out.println("");
+      counter++;
+    }
+    System.out.println(printArray(numbers));
+    
+    // Sort the numbers
+    bubbleSort(numbers);
+    System.out.println(printArray(numbers));
+    
+  }
+    
+  public static String printArray(int[] array) {
+   String result = "";
+      for (int r = 0; r < array.length; r++) {
+        result += array[r];
+        if(r != array.length-1)
+        result += "~";
+    }
+    return result;
+    }
+  
+  public static void swap(int[] array, int posA, int posB){
+    array[posA] = array[posA] + array[posB];
+    array[posB] = array[posA] - array[posB];
+    array[posA] = array[posA] - array[posB];
+    }
+  
+  public static void bubbleSort(int[] array) {
+      for (int out = array.length-1; out > 0; out--) {
+    for (int in = 0; in < out; in++) {
+    if (array[in] > array[in+1]) {
+    int tmp = array[in]; // swap items
+    array[in] = array[in+1]; //
+    array[in+1] = tmp; //
+         }
+     }
+    }
+    }   
+    
+
+
+  }
