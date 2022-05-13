@@ -1,0 +1,11 @@
+class Main {
+  public static void main(String[] args) {
+    try { 
+    String t="abc"; 
+    int i=Integer.parseInt(t); // NumberFormatException 
+     } catch (NumberFormatException e) {
+    System.out.println("Exception thrown :" + e);
+         
+    }System.out.println("Out of the block");
+    }
+}
