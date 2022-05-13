@@ -1,0 +1,41 @@
+class Main {
+  public static void main(String[] args) {
+    int[] Array1 = {1 ,2 ,3 ,4 ,5 ,6 ,7, 8, 9, 10};
+    int[] Array2 = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    int[] Array3 = {3, 9, 6, 10, 8, 2, 7, 5, 1, 4};
+      bubbleSort(Array1);
+      System.out.println(printArray(Array1));
+      bubbleSort(Array2);
+      System.out.println(printArray(Array2));
+      bubbleSort(Array3);
+      System.out.println(printArray(Array3));
+  }
+    
+  public static String printArray(int[] array) {
+   String result = "";
+      for (int r = 0; r < array.length; r++) {
+        result += array[r];
+        if(r != array.length-1)
+        result += "~";
+    }
+    return result;
+    }
+  
+  public static void swap(int[] array, int posA, int posB){
+     array[posA] = array[posA] + array[posB];
+    array[posB] = array[posA] - array[posB];
+    array[posA] = array[posA] - array[posB];
+    }
+  
+  public static void bubbleSort(int[] array) {
+  for (int out = array.length-1; out > 0; out--) {
+    for (int in = 0; in < out; in++) {
+    if (array[in] > array[in+1]) {
+    int tmp = array[in]; 
+    array[in] = array[in+1];
+    array[in+1] = tmp;
+         }
+     }
+    }
+    } 
+}
