@@ -1,0 +1,44 @@
+class Main {
+  public static void main(String[] args) {
+    int[] Array1 = {1 ,2 ,3 ,4 ,5 ,6 ,7, 8, 9, 10};
+    int[] Array2 = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    int[] Array3 = {3, 9, 6, 10, 8, 2, 7, 5, 1, 4};
+      selectionSort(Array1);
+      System.out.println(printArray(Array1));
+      selectionSort(Array2);
+      System.out.println(printArray(Array2));
+      selectionSort(Array3);
+      System.out.println(printArray(Array3));
+  }
+    
+  public static String printArray(int[] array) {
+  String result = "";
+      for (int r = 0; r < array.length; r++) {
+        result += array[r];
+        if(r != array.length-1)
+        result += "~";
+    }
+    return result;
+    }
+  
+  public static void swap(int[] array, int posA, int posB){
+    array[posA] = array[posA] + array[posB];
+    array[posB] = array[posA] - array[posB];
+    array[posA] = array[posA] - array[posB];
+    }
+  
+  public static void selectionSort(int[] array) {
+    int in, out, min;
+    for (out=0; out < array.length-1; out++) {
+    min = out;
+    for (in = out+1; in < array.length; in++) {
+    if (array[in] < array[min]) {
+    min = in; // new minimum
+    }
+    }
+    int tmp = array[out]; // swap items
+    array[out] = array[min]; //
+    array[min] = tmp; //
+}
+}
+}
